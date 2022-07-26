@@ -43,32 +43,6 @@ class GifAdapterTrendingItems :
         return GifAdapterViewHolder(adapterLayout)
     }
 
-    fun attach(holder : GifAdapterViewHolder): RequestListener<Drawable> {
-        return object : RequestListener<Drawable> {
-            override fun onLoadFailed(
-                e: GlideException?,
-                model: Any?,
-                target: Target<Drawable>?,
-                isFirstResource: Boolean
-            ): Boolean {
-                holder.progressBar.visibility = View.INVISIBLE
-                return false
-            }
-
-            override fun onResourceReady(
-                resource: Drawable?,
-                model: Any?,
-                target: Target<Drawable>?,
-                dataSource: DataSource?,
-                isFirstResource: Boolean
-            ): Boolean {
-                holder.progressBar.visibility = View.VISIBLE
-                return true
-            }
-        }
-    }
-
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: GifAdapterViewHolder, position: Int) {
         Log.d("adapterItems standard gifs", gifs[position].toString())
 
