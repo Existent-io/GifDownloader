@@ -50,38 +50,38 @@ class GifAdapterRandomItems :
         holder: GifAdapterViewHolder,
         position: Int
     ) {
-        Log.d("gifs random is empty", gifsRandom.isNotEmpty().toString())
-
         val item2 = gifsRandom[position]
+        val resourceListener = object : RequestListener<Drawable> {
+            override fun onResourceReady(
+                resource: Drawable?,
+                model: Any?,
+                target: Target<Drawable>?,
+                dataSource: DataSource?,
+                isFirstResource: Boolean
+            ): Boolean {
+                holder.progressBar.visibility = View.INVISIBLE
+                return false
+            }
+
+            override fun onLoadFailed(
+                e: GlideException?,
+                model: Any?,
+                target: Target<Drawable>?,
+                isFirstResource: Boolean
+            ): Boolean {
+                holder.progressBar.visibility = View.VISIBLE
+                return true
+            }
+
+        }
+
         Log.d("adapterItems random gifs", gifsRandom[position].toString())
 
         Glide.with(holder.itemView.context)
             .load(item2?.data?.images?.original!!.url)
             .apply(RequestOptions().override(200, 200))
             .centerCrop()
-            .listener(object : RequestListener<Drawable> {
-                override fun onResourceReady(
-                    resource: Drawable?,
-                    model: Any?,
-                    target: Target<Drawable>?,
-                    dataSource: DataSource?,
-                    isFirstResource: Boolean
-                ): Boolean {
-                    holder.progressBar.visibility = View.INVISIBLE
-                    return false
-                }
-
-                override fun onLoadFailed(
-                    e: GlideException?,
-                    model: Any?,
-                    target: Target<Drawable>?,
-                    isFirstResource: Boolean
-                ): Boolean {
-                    holder.progressBar.visibility = View.VISIBLE
-                    return true
-                }
-
-            })
+            .listener(resourceListener)
             .into(holder.imageView)
 
         Log.d("adapterItems random gifs", item2?.data?.images?.original.url)

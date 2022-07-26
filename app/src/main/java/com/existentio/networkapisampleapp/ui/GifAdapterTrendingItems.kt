@@ -1,12 +1,14 @@
 package com.existentio.networkapisampleapp.ui
 
 import android.graphics.drawable.Drawable
+import android.os.Build
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.ProgressBar
+import androidx.annotation.RequiresApi
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -41,44 +43,66 @@ class GifAdapterTrendingItems :
         return GifAdapterViewHolder(adapterLayout)
     }
 
-    override fun onBindViewHolder(holder: GifAdapterViewHolder, position: Int) {
+    fun attach(holder : GifAdapterViewHolder): RequestListener<Drawable> {
+        return object : RequestListener<Drawable> {
+            override fun onLoadFailed(
+                e: GlideException?,
+                model: Any?,
+                target: Target<Drawable>?,
+                isFirstResource: Boolean
+            ): Boolean {
+                holder.progressBar.visibility = View.INVISIBLE
+                return false
+            }
 
+            override fun onResourceReady(
+                resource: Drawable?,
+                model: Any?,
+                target: Target<Drawable>?,
+                dataSource: DataSource?,
+                isFirstResource: Boolean
+            ): Boolean {
+                holder.progressBar.visibility = View.VISIBLE
+                return true
+            }
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    override fun onBindViewHolder(holder: GifAdapterViewHolder, position: Int) {
         Log.d("adapterItems standard gifs", gifs[position].toString())
 
         val item = gifs[position]
+        val resourceListener = object : RequestListener<Drawable> {
+            override fun onResourceReady(
+                resource: Drawable?,
+                model: Any?,
+                target: Target<Drawable>?,
+                dataSource: DataSource?,
+                isFirstResource: Boolean
+            ): Boolean {
+                holder.progressBar.visibility = View.INVISIBLE
+                return false
+            }
+
+            override fun onLoadFailed(
+                e: GlideException?,
+                model: Any?,
+                target: Target<Drawable>?,
+                isFirstResource: Boolean
+            ): Boolean {
+                holder.progressBar.visibility = View.VISIBLE
+                return true
+            }
+
+        }
 
         Glide.with(holder.itemView.context)
             .load(item.images.original.url)
-            .apply(RequestOptions().override(200, 200))
+            .apply(RequestOptions().override(150, 150))
             .centerCrop()
-            .listener(object : RequestListener<Drawable> {
-                override fun onResourceReady(
-                    resource: Drawable?,
-                    model: Any?,
-                    target: Target<Drawable>?,
-                    dataSource: DataSource?,
-                    isFirstResource: Boolean
-                ): Boolean {
-                    holder.progressBar.visibility = View.INVISIBLE
-                    return false
-                }
-
-                override fun onLoadFailed(
-                    e: GlideException?,
-                    model: Any?,
-                    target: Target<Drawable>?,
-                    isFirstResource: Boolean
-                ): Boolean {
-                    holder.progressBar.visibility = View.VISIBLE
-                    return true
-                }
-
-            }
-
-            )
+            .listener(resourceListener)
             .into(holder.imageView)
-
-        //was gifs[position].images.original.url
 
         holder.itemView.setOnClickListener {
             Log.d("pressed", holder.itemView.isVisible.toString())
@@ -88,4 +112,6 @@ class GifAdapterTrendingItems :
     }
 
     override fun getItemCount(): Int = gifs.size
+
+
 }
