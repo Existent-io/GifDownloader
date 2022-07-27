@@ -1,6 +1,5 @@
 package com.existentio.networkapisampleapp.ui
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.existentio.networkapisampleapp.data.GifCollection
@@ -26,12 +25,10 @@ class HomeViewModel constructor(
         val response = gifRepository.requestGifData()
         response.enqueue(object : Callback<GifCollection> {
             override fun onResponse(call: Call<GifCollection>, response: Response<GifCollection>) {
-                Log.d("SUCCESS", response.toString())
                 gifsTrending.postValue(response.body())
             }
 
             override fun onFailure(call: Call<GifCollection>, t: Throwable) {
-                Log.d("FAILED", t.toString())
                 errorMessage.postValue(t.message)
             }
         })
@@ -42,21 +39,17 @@ class HomeViewModel constructor(
         val response = gifRepository.requestGifDataRandom()
         response.enqueue(object : Callback<GifItem> {
             override fun onResponse(call: Call<GifItem>, response: Response<GifItem>) {
-                Log.d("SUCCESS RANDOM", response.toString())
-
                 if (requestCounter > 0) {
                     gifs.add(response.body())
                     requestCounter--
                     provideGifDataRandom()
                 } else {
-                    Log.d("tmp size", gifs.size.toString())
                     gifsRandom.postValue(gifs)
                 }
 
             }
 
             override fun onFailure(call: Call<GifItem>, t: Throwable) {
-                Log.d("FAILED RANDOM", t.toString())
                 errorMessage.postValue(t.message)
             }
 

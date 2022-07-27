@@ -1,7 +1,6 @@
 package com.existentio.networkapisampleapp.ui
 
 import android.graphics.drawable.Drawable
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,11 +23,6 @@ class GifAdapterRandomItems :
 
     fun setGifs(gifItem: MutableList<GifItem?>) {
         this.gifsRandom = gifItem
-        Log.d("gifItems inside adapterItems", gifsRandom.size.toString())
-
-        for (x in 0 until gifsRandom.size) {
-            Log.d("gifItems inside adapterItems", gifsRandom.get(x).toString())
-        }
         notifyDataSetChanged()
     }
 
@@ -50,7 +44,7 @@ class GifAdapterRandomItems :
         holder: GifAdapterViewHolder,
         position: Int
     ) {
-        val item2 = gifsRandom[position]
+        val gif = gifsRandom[position]
         val resourceListener = object : RequestListener<Drawable> {
             override fun onResourceReady(
                 resource: Drawable?,
@@ -72,20 +66,14 @@ class GifAdapterRandomItems :
                 holder.progressBar.visibility = View.VISIBLE
                 return true
             }
-
         }
 
-        Log.d("adapterItems random gifs", gifsRandom[position].toString())
-
         Glide.with(holder.itemView.context)
-            .load(item2?.data?.images?.original!!.url)
-            .apply(RequestOptions().override(200, 200))
+            .load(gif?.data?.images?.original!!.url)
+            .apply(RequestOptions().override(150, 150))
             .centerCrop()
             .listener(resourceListener)
             .into(holder.imageView)
-
-        Log.d("adapterItems random gifs", item2?.data?.images?.original.url)
-
     }
 
     override fun getItemCount(): Int = gifsRandom.size

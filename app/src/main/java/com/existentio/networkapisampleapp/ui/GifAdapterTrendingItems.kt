@@ -1,15 +1,11 @@
 package com.existentio.networkapisampleapp.ui
 
 import android.graphics.drawable.Drawable
-import android.os.Build
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.ProgressBar
-import androidx.annotation.RequiresApi
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
@@ -20,15 +16,13 @@ import com.bumptech.glide.request.target.Target
 import com.existentio.networkapisampleapp.R
 import com.existentio.networkapisampleapp.data.Gif
 
-class GifAdapterTrendingItems :
+class GifAdapterTrendingItems() :
     RecyclerView.Adapter<GifAdapterTrendingItems.GifAdapterViewHolder>() {
 
-    var gifs = listOf<Gif>()
+    var gif = listOf<Gif>()
 
     fun setGifCollection(gifs: List<Gif>) {
-        this.gifs = gifs
-        Log.d("gif22", gifs.size.toString())
-
+        this.gif = gifs
         notifyDataSetChanged()
     }
 
@@ -44,9 +38,8 @@ class GifAdapterTrendingItems :
     }
 
     override fun onBindViewHolder(holder: GifAdapterViewHolder, position: Int) {
-        Log.d("adapterItems standard gifs", gifs[position].toString())
 
-        val item = gifs[position]
+        val item = gif[position]
         val resourceListener = object : RequestListener<Drawable> {
             override fun onResourceReady(
                 resource: Drawable?,
@@ -79,13 +72,12 @@ class GifAdapterTrendingItems :
             .into(holder.imageView)
 
         holder.itemView.setOnClickListener {
-            Log.d("pressed", holder.itemView.isVisible.toString())
         }
 
         holder.imageView.adjustViewBounds = true
     }
 
-    override fun getItemCount(): Int = gifs.size
+    override fun getItemCount(): Int = gif.size
 
 
 }
