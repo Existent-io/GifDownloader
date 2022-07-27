@@ -8,7 +8,6 @@ package com.existentio.networkapisampleapp.data
  **/
 data class GifCollection(
     val data: List<Gif>?,
-//    val gif: Gif?,
     val meta: Meta?,
     val pagination: Pagination?
 )
