@@ -11,10 +11,11 @@ import androidx.fragment.app.setFragmentResultListener
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.existentio.networkapisampleapp.R
-import com.existentio.networkapisampleapp.data.Gif
+import com.existentio.networkapisampleapp.adapter.GifAdapterAllItems
 import com.existentio.networkapisampleapp.data.GifRepository
 import com.existentio.networkapisampleapp.databinding.FragmentSearchBinding
 import com.existentio.networkapisampleapp.network.api.GifDownloadService
+import com.existentio.networkapisampleapp.viewmodel.SearchViewModel
 
 
 class SearchFragment : Fragment() {

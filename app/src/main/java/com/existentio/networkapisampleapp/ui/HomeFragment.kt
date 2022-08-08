@@ -1,7 +1,6 @@
 package com.existentio.networkapisampleapp.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,11 +11,12 @@ import androidx.fragment.app.setFragmentResult
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.existentio.networkapisampleapp.R
-import com.existentio.networkapisampleapp.data.Gif
+import com.existentio.networkapisampleapp.adapter.GifAdapterRandomItems
+import com.existentio.networkapisampleapp.adapter.GifAdapterTrendingItems
 import com.existentio.networkapisampleapp.data.GifRepository
 import com.existentio.networkapisampleapp.databinding.FragmentHomeBinding
-import com.existentio.networkapisampleapp.model.GifItem
 import com.existentio.networkapisampleapp.network.api.GifDownloadService
+import com.existentio.networkapisampleapp.viewmodel.HomeViewModel
 
 class HomeFragment : Fragment() {
 

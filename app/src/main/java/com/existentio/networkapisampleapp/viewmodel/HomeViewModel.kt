@@ -1,4 +1,4 @@
-package com.existentio.networkapisampleapp.ui
+package com.existentio.networkapisampleapp.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

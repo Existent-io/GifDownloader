@@ -1,4 +1,4 @@
-package com.existentio.networkapisampleapp.ui
+package com.existentio.networkapisampleapp.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData

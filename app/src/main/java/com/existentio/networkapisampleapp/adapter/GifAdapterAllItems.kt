@@ -1,4 +1,4 @@
-package com.existentio.networkapisampleapp.ui
+package com.existentio.networkapisampleapp.adapter
 
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
@@ -34,7 +34,7 @@ class GifAdapterAllItems :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GifAdapterViewHolder {
         val adapterLayout = LayoutInflater.from(parent.context)
             .inflate(R.layout.gif_item_grid_short, parent, false)
-        return GifAdapterAllItems.GifAdapterViewHolder(adapterLayout)
+        return GifAdapterViewHolder(adapterLayout)
     }
 
     override fun onBindViewHolder(holder: GifAdapterViewHolder, position: Int) {

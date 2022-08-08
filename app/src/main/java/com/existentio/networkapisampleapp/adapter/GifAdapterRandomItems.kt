@@ -1,4 +1,4 @@
-package com.existentio.networkapisampleapp.ui
+package com.existentio.networkapisampleapp.adapter
 
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
