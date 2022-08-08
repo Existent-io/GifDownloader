@@ -1,7 +1,10 @@
 <resources>
     <string name="app_name">NetworkApiSampleApp</string>
-    <!-- TODO: Remove or change this placeholder text -->
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
     <string name="lead_fragment_label">Home Fragment</string>
+    <string name="search_fragment_label">Search Fragment</string>
+
     <string name="search_view_hint">Search gifs</string>
 </resources>

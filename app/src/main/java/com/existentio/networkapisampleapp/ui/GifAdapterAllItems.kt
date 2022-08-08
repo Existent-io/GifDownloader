@@ -16,13 +16,13 @@ import com.bumptech.glide.request.target.Target
 import com.existentio.networkapisampleapp.R
 import com.existentio.networkapisampleapp.data.Gif
 
-class GifAdapterTrendingItems :
-    RecyclerView.Adapter<GifAdapterTrendingItems.GifAdapterViewHolder>() {
+class GifAdapterAllItems :
+    RecyclerView.Adapter<GifAdapterAllItems.GifAdapterViewHolder>() {
 
-    var gifs = listOf<Gif?>()
+    var gif = listOf<Gif>()
 
-    fun setGifCollection(gifs: List<Gif?>) {
-        this.gifs = gifs
+    fun setGifCollection(gifs: List<Gif>) {
+        this.gif = gifs
         notifyDataSetChanged()
     }
 
@@ -33,13 +33,13 @@ class GifAdapterTrendingItems :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GifAdapterViewHolder {
         val adapterLayout = LayoutInflater.from(parent.context)
-            .inflate(R.layout.gif_item_horizontal_short, parent, false)
-        return GifAdapterViewHolder(adapterLayout)
+            .inflate(R.layout.gif_item_grid_short, parent, false)
+        return GifAdapterAllItems.GifAdapterViewHolder(adapterLayout)
     }
 
     override fun onBindViewHolder(holder: GifAdapterViewHolder, position: Int) {
+        val item = gif[position]
 
-        val item = gifs[position]
         val resourceListener = object : RequestListener<Drawable> {
             override fun onResourceReady(
                 resource: Drawable?,
@@ -65,8 +65,8 @@ class GifAdapterTrendingItems :
         }
 
         Glide.with(holder.itemView.context)
-            .load(item?.images?.original!!.url)
-            .apply(RequestOptions().override(150, 150))
+            .load(item.images.original.url)
+            .apply(RequestOptions().override(180, 180))
             .centerCrop()
             .listener(resourceListener)
             .into(holder.imageView)
@@ -77,7 +77,6 @@ class GifAdapterTrendingItems :
         holder.imageView.adjustViewBounds = true
     }
 
-    override fun getItemCount(): Int = gifs.size
-
+    override fun getItemCount(): Int = gif.size
 
 }

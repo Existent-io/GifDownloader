@@ -36,7 +36,7 @@ class GifAdapterRandomItems :
         viewType: Int
     ): GifAdapterViewHolder {
         val adapterLayout = LayoutInflater.from(parent.context)
-            .inflate(R.layout.horizontal_gif_item_short, parent, false)
+            .inflate(R.layout.gif_item_horizontal_short, parent, false)
         return GifAdapterViewHolder(adapterLayout)
     }
 

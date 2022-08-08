@@ -9,14 +9,24 @@
         android:id="@+id/HomeFragment"
         android:name="com.existentio.networkapisampleapp.ui.HomeFragment"
         android:label="@string/lead_fragment_label"
-        tools:layout="@layout/fragment_home"/>
+        tools:layout="@layout/fragment_home">
 
-<!--    <action-->
-<!--        android:id="@+id/action_LeadFragment_to_SearchFragment"-->
-<!--        app:destination="@id/SearchFragment" />-->
+        <action
+            android:id="@+id/action_HomeFragment_to_SearchFragment"
+            app:destination="@id/SearchFragment" />
 
-<!--    <action-->
-<!--        android:id="@+id/action_LeadFragment_to_CommandLineFragment"-->
-<!--        app:destination="@id/CommandLineFragment" />-->
+    </fragment>
+
+    <fragment
+        android:id="@+id/SearchFragment"
+        android:name="com.existentio.networkapisampleapp.ui.SearchFragment"
+        android:label="@string/search_fragment_label"
+        tools:layout="@layout/fragment_search">
+
+        <action
+            android:id="@+id/action_SearchFragment_to_HomeFragment"
+            app:destination="@id/HomeFragment" />
+    </fragment>
+
 
 </navigation>

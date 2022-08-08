@@ -14,9 +14,10 @@ class HomeViewModel constructor(
 ) : ViewModel() {
 
     val gifsTrending = MutableLiveData<GifCollection>()
-    val gifsRandom = MutableLiveData<MutableList<GifItem?>>()
 
-    var gifs = mutableListOf<GifItem?>()
+    val gifsRandom = MutableLiveData<MutableList<GifItem?>>()
+    var gifsRandomResult = mutableListOf<GifItem?>()
+
     var requestCounter = 20
 
     val errorMessage = MutableLiveData<String>()
@@ -40,13 +41,12 @@ class HomeViewModel constructor(
         response.enqueue(object : Callback<GifItem> {
             override fun onResponse(call: Call<GifItem>, response: Response<GifItem>) {
                 if (requestCounter > 0) {
-                    gifs.add(response.body())
+                    gifsRandomResult.add(response.body())
                     requestCounter--
                     provideGifDataRandom()
                 } else {
-                    gifsRandom.postValue(gifs)
+                    gifsRandom.postValue(gifsRandomResult)
                 }
-
             }
 
             override fun onFailure(call: Call<GifItem>, t: Throwable) {

@@ -7,5 +7,10 @@ class GifRepository constructor(private val gifDownloadService: GifDownloadServi
     fun requestGifData() = gifDownloadService.retrieveGifs()
 
     fun requestGifDataRandom() = gifDownloadService.retrieveGifsRandom()
+
+    fun requestGifByQuery(
+        query: String,
+        offset: String
+    ) = gifDownloadService.retrieveGifsByQuery(query, offset)
 }
 
