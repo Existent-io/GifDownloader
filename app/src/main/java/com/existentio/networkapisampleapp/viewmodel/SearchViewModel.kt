@@ -1,6 +1,5 @@
 package com.existentio.networkapisampleapp.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.existentio.networkapisampleapp.data.GifCollection

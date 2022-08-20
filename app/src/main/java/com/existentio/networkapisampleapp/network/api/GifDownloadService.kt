@@ -1,7 +1,6 @@
 package com.existentio.networkapisampleapp.network.api
 
 import com.existentio.networkapisampleapp.data.GifCollection
-import com.existentio.networkapisampleapp.data.GifRepository
 import com.existentio.networkapisampleapp.model.GifItem
 import retrofit2.Call
 import retrofit2.Retrofit
@@ -23,18 +22,9 @@ interface GifDownloadService {
     ): Call<GifCollection>
 
     companion object {
-         val API_KEY_TEST = "hC15BUTFtt50bPo9y1dPl8Lkz2H41qx2"
-//        private val API_KEY_PROD = ""
+        val API_KEY_TEST = "hC15BUTFtt50bPo9y1dPl8Lkz2H41qx2"
 
         private val BASE_URL = "https://api.giphy.com/"
-        private val PAGE_LIMIT = "100"
-        private val RATING = "g"
-        private val OFFSET = "0"
-        private val LANGUAGE = "en"
-        private val SEARCH_ENDPOINT = "v1/gifs/search?/"
-        var USER_INPUT = "drama"
-        var QUERY_URL = SEARCH_ENDPOINT + "api_key=$API_KEY_TEST" + "&q=$USER_INPUT" +
-                "&limit=$PAGE_LIMIT" + "&offset=$OFFSET" + "&rating=$RATING" + "&lang=$LANGUAGE/"
 
         fun create(): GifDownloadService {
             val retrofit = Retrofit.Builder()

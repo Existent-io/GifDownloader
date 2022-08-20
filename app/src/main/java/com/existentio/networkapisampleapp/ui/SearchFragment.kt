@@ -1,7 +1,6 @@
 package com.existentio.networkapisampleapp.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -38,6 +37,7 @@ class SearchFragment : Fragment() {
             val result = bundle.getString("result")
             binding.searchViewAllGifs.setQuery(result, true)
         }
+
     }
 
     override fun onCreateView(
@@ -61,13 +61,11 @@ class SearchFragment : Fragment() {
     private fun performSearch() {
         binding.searchViewAllGifs.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                Log.d("searchSubmit", query.toString())
                 searchApps(query)
                 return true
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                Log.d("searchChange", newText.toString())
                 searchApps(newText)
                 return true
             }
@@ -83,7 +81,7 @@ class SearchFragment : Fragment() {
         }
     }
 
-    private fun loadGifs(textQuery: String, offset : String) {
+    private fun loadGifs(textQuery: String, offset: String) {
         viewModel.gifs.observe(this, Observer {
             adapterAllGifItems.setGifCollection(it.data!!)
         })

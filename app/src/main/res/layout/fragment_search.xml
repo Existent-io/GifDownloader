@@ -13,9 +13,7 @@
         android:layout_margin="8dp"
         android:background="@android:color/white"
         android:focusableInTouchMode="true"
-        android:focusedByDefault="true"
         app:defaultQueryHint="@string/search_view_hint"
-        app:iconifiedByDefault="false"
         app:layout_constraintTop_toTopOf="parent"
         app:queryBackground="@android:color/transparent"
         tools:ignore="MissingConstraints" />
